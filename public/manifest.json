@@ -1,0 +1,19 @@
+{
+  "name": "Administrative Ethics MCQ Practice",
+  "short_name": "Ethics MCQ",
+  "description": "230 practice MCQs on administrative ethics with timed sessions, exam mode, progress tracking and offline use.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6fb",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
