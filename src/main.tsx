@@ -1,19 +1,29 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+const rootElement = document.getElementById("root");
 
-// Offline support: register the service worker in production builds only.
-if ("serviceWorker" in navigator && import.meta.env.PROD) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {
-      /* offline caching is optional; the app still works online */
-    });
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootElement).render(<App />);
+
+// Disable SW registration temporarily until the app is stable on mobile
+if (
+  "serviceWorker" in navigator &&
+  window.location.protocol !== "file:" &&
+  import.meta.env.PROD
+) {
+  window.addEventListener("load", async () => {
+    try {
+      await navigator.serviceWorker.register(
+        new URL("./sw.js", window.location.href),
+        { scope: "./" },
+      );
+    } catch {
+      // Ignore service worker registration failures
+    }
   });
 }
