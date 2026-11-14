@@ -120,3 +120,16 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Backdrop filters and fixed backgrounds are expensive on many mobile GPUs.
+   Keep the same layout while avoiding the blur compositing that can stall taps. */
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
